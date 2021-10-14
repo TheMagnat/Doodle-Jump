@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-        
+
+    Camera cam;
+
     private Rigidbody2D rigidBody;
 
     private BoxCollider2D feetCollider;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        cam = Camera.main;
 
         BoxCollider2D[] allColliders = GetComponents<BoxCollider2D>();
 
@@ -73,6 +76,9 @@ public class PlayerController : MonoBehaviour
         {
             elapsedFire = 0.0f;
             onFire = true;
+
+            Vector3 screenPos = cam.WorldToScreenPoint(rigidBody.position);
+            Debug.Log("target is " + screenPos.x + " pixels from the left : " + cam.pixelWidth);
         }
 
 
@@ -201,13 +207,33 @@ public class PlayerController : MonoBehaviour
         {
             feetCollider.enabled = true;
         }
-        else
-        {
-            feetCollider.enabled = false;
-        }
 
 
+        //Updare velocity from inputs
         rigidBody.velocity = new Vector2(xVelocity, rigidBody.velocity.y);
+
+        //Handle sides
+        Vector3 screenPos = cam.WorldToScreenPoint(rigidBody.position);
+
+        float fromLeft = screenPos.x;
+        float fromRight = cam.pixelWidth - screenPos.x;
+
+
+        float tolerence = 20;
+
+        if (fromLeft < -tolerence)
+        {
+
+            Vector3 worldPos = cam.ScreenToWorldPoint(new Vector2(screenPos.x + (cam.pixelWidth + tolerence*2), 0));
+
+            rigidBody.MovePosition(new Vector2(worldPos.x, rigidBody.position.y));
+        }
+        else if (fromRight < -tolerence)
+        {
+            Vector3 worldPos = cam.ScreenToWorldPoint(new Vector2(screenPos.x - (cam.pixelWidth + tolerence*2), 0));
+
+            rigidBody.MovePosition(new Vector2(worldPos.x, rigidBody.position.y));
+        }
 
     }
 
@@ -223,6 +249,8 @@ public class PlayerController : MonoBehaviour
                 elapsedPlie = 0.0f;
 
                 rigidBody.AddForce(new Vector2(0, 22), ForceMode2D.Impulse);
+                feetCollider.enabled = false;
+
             }
         }
     }
