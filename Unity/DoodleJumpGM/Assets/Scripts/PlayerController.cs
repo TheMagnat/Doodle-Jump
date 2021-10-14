@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    Camera cam;
+    private Animator animator;
+
+    private Camera cam;
 
     private Rigidbody2D rigidBody;
 
@@ -46,6 +48,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        animator = gameObject.GetComponent<Animator>();
+
         rigidBody = GetComponent<Rigidbody2D>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -75,7 +80,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             elapsedFire = 0.0f;
-            onFire = true;
+            animator.SetBool("fire", true);
 
             Vector3 screenPos = cam.WorldToScreenPoint(rigidBody.position);
             Debug.Log("target is " + screenPos.x + " pixels from the left : " + cam.pixelWidth);
@@ -86,7 +91,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("left"))
         {
 
-            right = false;
+            animator.SetBool("right", false);
 
             decreaseVelocity = false;
 
@@ -102,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("right"))
         {
 
-            right = true;
+            animator.SetBool("right", true);
 
             decreaseVelocity = false;
 
@@ -139,62 +144,24 @@ public class PlayerController : MonoBehaviour
 
 
         //Timer
-        if (onFire)
+        if (animator.GetBool("fire"))
         {
             elapsedFire += Time.deltaTime;
             if (elapsedFire > 0.3)
             {
-                onFire = false;
+                animator.SetBool("fire", false);
             }
         }
 
-        if (plie)
+        if (animator.GetBool("jumping"))
         {
             elapsedPlie += Time.deltaTime;
             if (elapsedPlie > 0.25)
             {
-                plie = false;
+                animator.SetBool("jumping", false);
             }
         }
 
-
-        //Render
-        if (onFire)
-        {
-            if (plie)
-            {
-                spriteRenderer.sprite = plieFire;
-            }
-            else
-            {
-                spriteRenderer.sprite = Fire;
-            }
-        }
-        else
-        {
-            if (plie)
-            {
-                if (right)
-                {
-                    spriteRenderer.sprite = plieRight;
-                }
-                else
-                {
-                    spriteRenderer.sprite = plieLeft;
-                }
-            }
-            else
-            {
-                if (right)
-                {
-                    spriteRenderer.sprite = normalRight;
-                }
-                else
-                {
-                    spriteRenderer.sprite = normalLeft;
-                }
-            }
-        }
 
 
 
@@ -245,7 +212,8 @@ public class PlayerController : MonoBehaviour
 
             if (rigidBody.velocity.y <= 0)
             {
-                plie = true;
+                //plie = true;
+                animator.SetBool("jumping", true);
                 elapsedPlie = 0.0f;
 
                 rigidBody.AddForce(new Vector2(0, 22), ForceMode2D.Impulse);

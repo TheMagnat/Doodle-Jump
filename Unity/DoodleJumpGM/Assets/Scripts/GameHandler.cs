@@ -31,7 +31,7 @@ public class GameHandler : MonoBehaviour
         while (lastSpawn < endPos)
         {
             float randomX = Random.Range(-maxSide, maxSide);
-            float randomY = Random.Range(0.3f, maxDist);            
+            float randomY = Random.Range(0.3f, 0.3f + (maxDist - 0.3f) * System.Math.Min(1f, lastSpawn/maxHeightDifficulty));            
 
             lastSpawn += randomY;
 
