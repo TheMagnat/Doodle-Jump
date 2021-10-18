@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 3da9ea3619f22eb4492bd0b09541c788
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7351448428316234756
+    second: brown1
+  - first:
+      213: 4513640285406936665
+    second: brown2
+  - first:
+      213: -9200627550055919254
+    second: brown3
+  - first:
+      213: 4716490540992098087
+    second: brown4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +111,7 @@ TextureImporter:
         width: 114
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 1, z: 0, w: 1}
       outline: []
       physicsShape: []
@@ -107,6 +119,90 @@ TextureImporter:
       bones: []
       spriteID: 44e78b9da0aa57910800000000000000
       internalID: 1834559386802486852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brown1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 847
+        width: 120
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 404946a5567950660800000000000000
+      internalID: 7351448428316234756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brown2
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 801
+        width: 120
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95eb29fdceba3ae30800000000000000
+      internalID: 4513640285406936665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brown3
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 736
+        width: 120
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a619e308dfdc05080800000000000000
+      internalID: -9200627550055919254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brown4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 661
+        width: 120
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72fe2527827547140800000000000000
+      internalID: 4716490540992098087
       vertices: []
       indices: 
       edges: []

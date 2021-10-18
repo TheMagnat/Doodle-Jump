@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   green: {fileID: 6161293580186987215, guid: 24a75abd4323ef14b9b4d97231029826, type: 3}
+  brown: {fileID: 6161293580186987215, guid: 33963eae3133f3643b5fcb2652f874df, type: 3}
 --- !u!4 &1041963551
 Transform:
   m_ObjectHideFlags: 0

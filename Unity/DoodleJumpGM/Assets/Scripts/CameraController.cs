@@ -25,7 +25,9 @@ public class CameraController : MonoBehaviour
         {
             currentY = player.transform.position.y;
 
-            transform.position = new Vector3(transform.position.x, currentY, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, currentY, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, currentY, transform.position.z), 0.5f);
+
         }
 
     }
