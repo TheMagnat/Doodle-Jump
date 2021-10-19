@@ -26,7 +26,7 @@ public class BrownPlatform : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
 
             animator.SetBool("broken", true);
-            //Object.Destroy(this.gameObject);
+
         }
     }
 

@@ -6,8 +6,17 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
 
+    public bool gameEnd = false;
+    public float endPosition;
+
     public GameObject green;
     public GameObject brown;
+    public GameObject blue;
+
+
+    private GameObject player;
+
+    private Camera cam;
 
     List<(float, float)> greenPos;
 
@@ -18,6 +27,7 @@ public class GameHandler : MonoBehaviour
 
     //Prob param
     private float brownProb = 0.35f;
+    private float maxBlueProb = 0.35f;
 
 
 
@@ -32,6 +42,11 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        player = GameObject.Find("Player");
+        cam = Camera.main;
+
+
 
         greenPos = new List<(float, float)>();
 
@@ -50,8 +65,10 @@ public class GameHandler : MonoBehaviour
 
 
         float currentBrownProb = brownProb;
+        float currentBlueProb = 1f;
 
-        
+
+
 
         while (lastSpawn < endPos)
         {
@@ -77,8 +94,19 @@ public class GameHandler : MonoBehaviour
             }
             else
             {
-                Debug.Log("Green");
+
                 currentBrownProb = brownProb;
+
+
+
+                float doBlue = Random.Range(0f, 1f);
+
+                if (doBlue < maxBlueProb * System.Math.Min(1f, lastSpawn / maxHeightDifficulty))
+                {
+                    color = "blue";
+                }
+
+                    
 
                 float greenSpace = lastSpawn - lastGreenY;
 
@@ -98,6 +126,10 @@ public class GameHandler : MonoBehaviour
             else if (color.Equals("brown"))
             {
                 Instantiate(brown, new Vector3(randomX, lastSpawn, 0), brown.transform.rotation);
+            }
+            else if (color.Equals("blue"))
+            {
+                Instantiate(blue, new Vector3(randomX, lastSpawn, 0), brown.transform.rotation);
             }
 
             newGreenPos.Add((randomX, lastSpawn));
@@ -120,6 +152,28 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (!gameEnd)
+        {
+            Vector3 screenPos = cam.WorldToScreenPoint(player.transform.position);
+
+            float tolerence = 0;
+
+            if (screenPos.y < -tolerence)
+            {
+                endPosition = player.transform.position.y;
+                gameEnd = true;
+
+
+                //Set menu
+
+                GameObject playAgain = GameObject.Find("EndScreen");
+
+                playAgain.transform.position = new Vector3(playAgain.transform.position.x, endPosition - 9, playAgain.transform.position.z);
+
+
+            }
+        }
+
     }
 }

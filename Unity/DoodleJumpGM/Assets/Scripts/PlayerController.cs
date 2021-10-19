@@ -77,6 +77,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+
+
         if (Input.GetKeyDown("space"))
         {
             elapsedFire = 0.0f;

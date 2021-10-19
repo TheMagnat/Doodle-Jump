@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 4716490540992098087
     second: brown4
+  - first:
+      213: 13607162767888313
+    second: blue
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -203,6 +206,27 @@ TextureImporter:
       bones: []
       spriteID: 72fe2527827547140800000000000000
       internalID: 4716490540992098087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 957
+        width: 114
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bf4e2774a7503000800000000000000
+      internalID: 13607162767888313
       vertices: []
       indices: 
       edges: []
