@@ -13,6 +13,8 @@ public class GameHandler : MonoBehaviour
     public GameObject brown;
     public GameObject blue;
 
+    public GameObject spring;
+
 
     private GameObject player;
 
@@ -28,6 +30,10 @@ public class GameHandler : MonoBehaviour
     //Prob param
     private float brownProb = 0.35f;
     private float maxBlueProb = 0.35f;
+    private float springProb = 0.25f;
+
+    //Other
+    float currentBrownProb;
 
 
 
@@ -38,10 +44,13 @@ public class GameHandler : MonoBehaviour
 
     private float maxSide = 2.5f;
 
+    float genPos = 0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        currentBrownProb = brownProb;
 
         player = GameObject.Find("Player");
         cam = Camera.main;
@@ -54,7 +63,7 @@ public class GameHandler : MonoBehaviour
         greenPos.Add((0, lastSpawn));
         lastGreenY = lastSpawn;
 
-        generatePlatforms(1000);
+        generatePlatforms(10);
     }
 
     void generatePlatforms(float endPos)
@@ -65,9 +74,6 @@ public class GameHandler : MonoBehaviour
 
 
         float currentBrownProb = brownProb;
-        float currentBlueProb = 1f;
-
-
 
 
         while (lastSpawn < endPos)
@@ -81,6 +87,7 @@ public class GameHandler : MonoBehaviour
             float randomX;
             float randomY;
 
+            bool spawnSpring = false;
 
             if (doBrown < currentBrownProb)
             {
@@ -106,7 +113,11 @@ public class GameHandler : MonoBehaviour
                     color = "blue";
                 }
 
-                    
+                float doSpring = Random.Range(0f, 1f);
+                if (doSpring < springProb)
+                {
+                    spawnSpring = true;
+                }
 
                 float greenSpace = lastSpawn - lastGreenY;
 
@@ -119,33 +130,38 @@ public class GameHandler : MonoBehaviour
             }
 
 
+            GameObject instance = null;
+
             if (color.Equals("green"))
             {
-                Instantiate(green, new Vector3(randomX, lastSpawn, 0), green.transform.rotation);
+                instance = Instantiate(green, new Vector3(randomX, lastSpawn, 0), green.transform.rotation);
             }
             else if (color.Equals("brown"))
             {
-                Instantiate(brown, new Vector3(randomX, lastSpawn, 0), brown.transform.rotation);
+                instance = Instantiate(brown, new Vector3(randomX, lastSpawn, 0), brown.transform.rotation);
             }
             else if (color.Equals("blue"))
             {
-                Instantiate(blue, new Vector3(randomX, lastSpawn, 0), brown.transform.rotation);
+                instance = Instantiate(blue, new Vector3(randomX, lastSpawn, 0), brown.transform.rotation);
+            }
+
+            if (spawnSpring)
+            {
+                float randomXspring = Random.Range(-0.4f, 0.4f);
+                GameObject instanceSpring = Instantiate(spring, new Vector3(randomX + randomXspring, lastSpawn + 0.36f, 0), spring.transform.rotation);
+                instanceSpring.transform.SetParent(instance.transform, true);
             }
 
             newGreenPos.Add((randomX, lastSpawn));
 
         }
 
-        /*
-        for (int i = 0; i < newGreenPos.Count - 1; ++i){
-
-            float y1 = 
-
-        }
-        */
 
 
         greenPos.AddRange(newGreenPos);
+
+
+        genPos = lastSpawn - 10;
 
     }
 
@@ -173,6 +189,16 @@ public class GameHandler : MonoBehaviour
 
 
             }
+
+
+            if(cam.transform.position.y > genPos)
+            {
+
+                generatePlatforms(lastSpawn + 10);
+
+            }
+
+
         }
 
     }

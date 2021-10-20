@@ -209,7 +209,23 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("solid"))
+        if (collision.gameObject.CompareTag("spring"))
+        {
+
+            if (rigidBody.velocity.y <= 0)
+            {
+                //plie = true;
+                animator.SetBool("jumping", true);
+                elapsedPlie = 0.0f;
+
+                rigidBody.AddForce(new Vector2(0, 40f), ForceMode2D.Impulse);
+                feetCollider.enabled = false;
+
+                collision.gameObject.GetComponent<SpringController>().Trigger();
+
+            }
+        }
+        else if (collision.gameObject.CompareTag("solid"))
         {
 
             if (rigidBody.velocity.y <= 0)
@@ -223,6 +239,7 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+
     }
 
 

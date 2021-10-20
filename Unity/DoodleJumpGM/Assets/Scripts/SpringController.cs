@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class platform : MonoBehaviour
+public class SpringController : MonoBehaviour
 {
+    Camera cam;
 
-    private Camera cam;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-
         cam = Camera.main;
-
-
-
     }
 
     // Update is called once per frame
@@ -22,9 +19,20 @@ public class platform : MonoBehaviour
     {
         Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
 
-        if (screenPos.y < 0)
+        animator = gameObject.GetComponent<Animator>();
+
+        float tolerence = 10;
+
+        if (screenPos.y < -tolerence)
         {
             Object.Destroy(this.gameObject);
         }
+
+        
+    }
+
+    public void Trigger()
+    {
+        animator.SetBool("trigger", true);
     }
 }
