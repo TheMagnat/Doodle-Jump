@@ -15,6 +15,9 @@ public class GameHandler : MonoBehaviour
 
     public GameObject spring;
 
+    //Enemie
+    public GameObject blackHole;
+
 
     private GameObject player;
 
@@ -24,7 +27,7 @@ public class GameHandler : MonoBehaviour
 
     //Pos param
     private float maxHeightDifficulty = 200f;
-    private float maxDist = 3f;
+    private float maxDist = 3.05f;
     private float minDist = 0.6f;
 
     //Prob param
@@ -34,6 +37,8 @@ public class GameHandler : MonoBehaviour
 
     //Other
     float currentBrownProb;
+
+    public int score = 0;
 
 
 
@@ -72,8 +77,6 @@ public class GameHandler : MonoBehaviour
 
         List<(float, float)> newGreenPos = new List<(float, float)>();
 
-
-        float currentBrownProb = brownProb;
 
 
         while (lastSpawn < endPos)
@@ -177,16 +180,8 @@ public class GameHandler : MonoBehaviour
 
             if (screenPos.y < -tolerence)
             {
-                endPosition = player.transform.position.y;
-                gameEnd = true;
 
-
-                //Set menu
-
-                GameObject playAgain = GameObject.Find("EndScreen");
-
-                playAgain.transform.position = new Vector3(playAgain.transform.position.x, endPosition - 9, playAgain.transform.position.z);
-
+                SetEnd();
 
             }
 
@@ -202,4 +197,18 @@ public class GameHandler : MonoBehaviour
         }
 
     }
+
+    public void SetEnd()
+    {
+        endPosition = player.transform.position.y;
+        gameEnd = true;
+
+
+        //Set menu
+
+        GameObject playAgain = GameObject.Find("EndScreen");
+
+        playAgain.transform.position = new Vector3(playAgain.transform.position.x, endPosition - 9, playAgain.transform.position.z);
+    }
+
 }

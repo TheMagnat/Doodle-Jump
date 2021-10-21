@@ -14,9 +14,11 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D feetCollider;
     private BoxCollider2D bodyCollider;
 
-    public float MAXSPEED = 4f;
+    private GameHandler gameHandler;
 
-    public float SPEED = 30f;
+    public float MAXSPEED = 5f;
+
+    public float SPEED = 45f;
 
     private float xVelocity = 0f;
 
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
+        gameHandler = FindObjectOfType<GameHandler>();
+
         animator = gameObject.GetComponent<Animator>();
 
         rigidBody = GetComponent<Rigidbody2D>();
@@ -77,91 +81,94 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-
-
-        if (Input.GetKeyDown("space"))
-        {
-            elapsedFire = 0.0f;
-            animator.SetBool("fire", true);
-
-            Vector3 screenPos = cam.WorldToScreenPoint(rigidBody.position);
-            Debug.Log("target is " + screenPos.x + " pixels from the left : " + cam.pixelWidth);
-        }
-
-
-        bool decreaseVelocity = true;
-        if (Input.GetKey("left"))
+        if (!gameHandler.gameEnd)
         {
 
-            animator.SetBool("right", false);
-
-            decreaseVelocity = false;
-
-            xVelocity -= SPEED * Time.deltaTime;
-
-            if (xVelocity < -MAXSPEED)
+            if (Input.GetKeyDown("space"))
             {
-                xVelocity = -MAXSPEED;
+                elapsedFire = 0.0f;
+                animator.SetBool("fire", true);
 
+                Vector3 screenPos = cam.WorldToScreenPoint(rigidBody.position);
+                Debug.Log("target is " + screenPos.x + " pixels from the left : " + cam.pixelWidth);
             }
-        }
 
-        if (Input.GetKey("right"))
-        {
 
-            animator.SetBool("right", true);
-
-            decreaseVelocity = false;
-
-            xVelocity += SPEED * Time.deltaTime;
-
-            if (xVelocity > MAXSPEED)
+            bool decreaseVelocity = true;
+            if (Input.GetKey("left"))
             {
 
-                xVelocity = MAXSPEED;
+                animator.SetBool("right", false);
 
-            }
-        }
+                decreaseVelocity = false;
 
-        if (decreaseVelocity)
-        {
+                xVelocity -= SPEED * Time.deltaTime;
 
-            if (xVelocity < 0f)
-            {
-                xVelocity += SPEED * Time.deltaTime ;
-                if (xVelocity > 0f)
+                if (xVelocity < -MAXSPEED)
                 {
-                    xVelocity = 0f;
+                    xVelocity = -MAXSPEED;
+
                 }
             }
-            else if(xVelocity > 0f)
+
+            if (Input.GetKey("right"))
             {
-                xVelocity -= SPEED * Time.deltaTime;
+
+                animator.SetBool("right", true);
+
+                decreaseVelocity = false;
+
+                xVelocity += SPEED * Time.deltaTime;
+
+                if (xVelocity > MAXSPEED)
+                {
+
+                    xVelocity = MAXSPEED;
+
+                }
+            }
+
+            if (decreaseVelocity)
+            {
+
                 if (xVelocity < 0f)
                 {
-                    xVelocity = 0f;
+                    xVelocity += SPEED * Time.deltaTime;
+                    if (xVelocity > 0f)
+                    {
+                        xVelocity = 0f;
+                    }
+                }
+                else if (xVelocity > 0f)
+                {
+                    xVelocity -= SPEED * Time.deltaTime;
+                    if (xVelocity < 0f)
+                    {
+                        xVelocity = 0f;
+                    }
                 }
             }
-        }
 
 
-        //Timer
-        if (animator.GetBool("fire"))
-        {
-            elapsedFire += Time.deltaTime;
-            if (elapsedFire > 0.3)
+            //Timer
+            if (animator.GetBool("fire"))
             {
-                animator.SetBool("fire", false);
+                elapsedFire += Time.deltaTime;
+                if (elapsedFire > 0.3)
+                {
+                    animator.SetBool("fire", false);
+                }
             }
-        }
 
-        if (animator.GetBool("jumping"))
-        {
-            elapsedPlie += Time.deltaTime;
-            if (elapsedPlie > 0.25)
+            if (animator.GetBool("jumping"))
             {
-                animator.SetBool("jumping", false);
+                elapsedPlie += Time.deltaTime;
+                if (elapsedPlie > 0.25)
+                {
+                    animator.SetBool("jumping", false);
+                }
             }
+
         }
 
 
@@ -172,9 +179,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
+
+
         if (rigidBody.velocity.y <= 0)
         {
             feetCollider.enabled = true;
+        }
+
+        if (gameHandler.gameEnd)
+        {
+            feetCollider.enabled = false;
         }
 
 

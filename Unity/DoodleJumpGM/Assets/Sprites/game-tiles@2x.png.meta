@@ -23,6 +23,9 @@ TextureImporter:
   - first:
       213: -1310407167510378221
     second: spring2
+  - first:
+      213: 809135382761942128
+    second: blackHole
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -275,6 +278,27 @@ TextureImporter:
       bones: []
       spriteID: 3190b6dbf9f70dde0800000000000000
       internalID: -1310407167510378221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blackHole
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 792
+        width: 145
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ca9b8f750aa3b00800000000000000
+      internalID: 809135382761942128
       vertices: []
       indices: 
       edges: []

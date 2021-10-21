@@ -34,6 +34,12 @@ public class CameraController : MonoBehaviour
                 //transform.position = new Vector3(transform.position.x, currentY, transform.position.z);
                 transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, currentY, transform.position.z), 0.5f);
 
+                int score = (int)(currentY * 50f);
+
+                GameObject.FindWithTag("score").GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+
+                gameHandler.score = score;
+
             }
 
         }
