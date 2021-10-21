@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D feetCollider;
     private BoxCollider2D bodyCollider;
 
-    private GameHandler gameHandler;
+
+    public bool canPlay = true;
 
     public float MAXSPEED = 5f;
 
@@ -23,8 +24,7 @@ public class PlayerController : MonoBehaviour
     private float xVelocity = 0f;
 
 
-
-    private SpriteRenderer spriteRenderer;
+    public bool gameEnd = false;
 
     //State
     private bool onFire = false;
@@ -51,13 +51,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
-        gameHandler = FindObjectOfType<GameHandler>();
 
         animator = gameObject.GetComponent<Animator>();
 
         rigidBody = GetComponent<Rigidbody2D>();
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         cam = Camera.main;
 
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (!gameHandler.gameEnd)
+        if (!gameEnd && canPlay)
         {
 
             if (Input.GetKeyDown("space"))
@@ -149,27 +147,28 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-
-            //Timer
-            if (animator.GetBool("fire"))
-            {
-                elapsedFire += Time.deltaTime;
-                if (elapsedFire > 0.3)
-                {
-                    animator.SetBool("fire", false);
-                }
-            }
-
-            if (animator.GetBool("jumping"))
-            {
-                elapsedPlie += Time.deltaTime;
-                if (elapsedPlie > 0.25)
-                {
-                    animator.SetBool("jumping", false);
-                }
-            }
-
         }
+
+        //Timer
+        if (animator.GetBool("fire"))
+        {
+            elapsedFire += Time.deltaTime;
+            if (elapsedFire > 0.3)
+            {
+                animator.SetBool("fire", false);
+            }
+        }
+
+        if (animator.GetBool("jumping"))
+        {
+            elapsedPlie += Time.deltaTime;
+            if (elapsedPlie > 0.25)
+            {
+                animator.SetBool("jumping", false);
+            }
+        }
+
+        
 
 
 
@@ -186,7 +185,7 @@ public class PlayerController : MonoBehaviour
             feetCollider.enabled = true;
         }
 
-        if (gameHandler.gameEnd)
+        if (gameEnd)
         {
             feetCollider.enabled = false;
         }
@@ -220,6 +219,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void Jump(float force)
+    {
+        animator.SetBool("jumping", true);
+        elapsedPlie = 0.0f;
+
+        rigidBody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
+        feetCollider.enabled = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -228,12 +236,7 @@ public class PlayerController : MonoBehaviour
 
             if (rigidBody.velocity.y <= 0)
             {
-                //plie = true;
-                animator.SetBool("jumping", true);
-                elapsedPlie = 0.0f;
-
-                rigidBody.AddForce(new Vector2(0, 40f), ForceMode2D.Impulse);
-                feetCollider.enabled = false;
+                Jump(40f);
 
                 collision.gameObject.GetComponent<SpringController>().Trigger();
 
@@ -244,12 +247,8 @@ public class PlayerController : MonoBehaviour
 
             if (rigidBody.velocity.y <= 0)
             {
-                //plie = true;
-                animator.SetBool("jumping", true);
-                elapsedPlie = 0.0f;
 
-                rigidBody.AddForce(new Vector2(0, 22), ForceMode2D.Impulse);
-                feetCollider.enabled = false;
+                Jump(22f);
 
             }
         }

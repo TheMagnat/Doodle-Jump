@@ -799,6 +799,7 @@ MonoBehaviour:
   blue: {fileID: 6161293580186987215, guid: e6b5aeea7ae307848846f68f33905d6d, type: 3}
   spring: {fileID: 5021858714693468195, guid: 084be4c8e3041de47938c04a9ff4e4a5, type: 3}
   blackHole: {fileID: 8370636512110161659, guid: eb707f204040dcf4c9c5502c180c5685, type: 3}
+  monstre: {fileID: 3617676538749418897, guid: 0f55081435e9c8448adb63cdb99e3a72, type: 3}
   score: 0
 --- !u!4 &1041963551
 Transform:

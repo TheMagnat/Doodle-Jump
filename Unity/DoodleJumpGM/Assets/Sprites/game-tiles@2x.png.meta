@@ -26,6 +26,21 @@ TextureImporter:
   - first:
       213: 809135382761942128
     second: blackHole
+  - first:
+      213: -6225369581295278039
+    second: monstre3
+  - first:
+      213: 33880429175075493
+    second: monstre4
+  - first:
+      213: 6586132478269563228
+    second: monstre2
+  - first:
+      213: 1902261542522636251
+    second: monstre1
+  - first:
+      213: 3221029900767607233
+    second: monstre5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -291,7 +306,7 @@ TextureImporter:
         width: 145
         height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,6 +314,111 @@ TextureImporter:
       bones: []
       spriteID: 07ca9b8f750aa3b00800000000000000
       internalID: 809135382761942128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monstre3
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 933
+        width: 162
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9286f57695b0b99a0800000000000000
+      internalID: -6225369581295278039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monstre4
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 933
+        width: 162
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a271d1221e587000800000000000000
+      internalID: 33880429175075493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monstre2
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 933
+        width: 162
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c51abea1894a66b50800000000000000
+      internalID: 6586132478269563228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monstre1
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 933
+        width: 162
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd7c2f75bc0366a10800000000000000
+      internalID: 1902261542522636251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monstre5
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 842
+        width: 162
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c93a2601a563bc20800000000000000
+      internalID: 3221029900767607233
       vertices: []
       indices: 
       edges: []

@@ -849,6 +849,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1843294459593025397, guid: 331fed9ced0beb8459e5f97cce37819d, type: 3}
+      propertyPath: canPlay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843294459593025397, guid: 331fed9ced0beb8459e5f97cce37819d, type: 3}
+      propertyPath: endGame
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1843294459593025402, guid: 331fed9ced0beb8459e5f97cce37819d, type: 3}
       propertyPath: m_RootOrder
       value: 2

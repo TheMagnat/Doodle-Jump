@@ -17,6 +17,7 @@ public class GameHandler : MonoBehaviour
 
     //Enemie
     public GameObject blackHole;
+    public GameObject monstre;
 
 
     private GameObject player;
@@ -34,6 +35,8 @@ public class GameHandler : MonoBehaviour
     private float brownProb = 0.35f;
     private float maxBlueProb = 0.35f;
     private float springProb = 0.25f;
+    private float blackProb = 0.05f;
+    private float monstreProb = 0.075f;
 
     //Other
     float currentBrownProb;
@@ -68,7 +71,7 @@ public class GameHandler : MonoBehaviour
         greenPos.Add((0, lastSpawn));
         lastGreenY = lastSpawn;
 
-        generatePlatforms(10);
+        generatePlatforms(1000);
     }
 
     void generatePlatforms(float endPos)
@@ -157,6 +160,45 @@ public class GameHandler : MonoBehaviour
 
             newGreenPos.Add((randomX, lastSpawn));
 
+            float spawnHole = Random.Range(0f, 1f);
+            float spawnMonstre = Random.Range(0f, 1f);
+
+            if (spawnHole < System.Math.Max(0f, (2*blackProb * System.Math.Min(1f, lastSpawn / maxHeightDifficulty)) - blackProb ) && color.Equals("green"))
+            {
+
+                float holeX = 0f;
+
+                if(randomX > 0)
+                {
+                    holeX = Random.Range(-maxSide, randomX - 1.5f);
+                }
+                else
+                {
+                    holeX = Random.Range(randomX + 1.5f, maxSide);
+                }
+
+
+                Instantiate(blackHole, new Vector3(holeX, lastSpawn, 0), blackHole.transform.rotation);
+            }
+            else if (spawnMonstre < System.Math.Max(0f, (2 * monstreProb * System.Math.Min(1f, lastSpawn / maxHeightDifficulty)) - monstreProb) && color.Equals("green"))
+            {
+                float holeX = 0f;
+
+                if (randomX > 0)
+                {
+                    holeX = Random.Range(-maxSide, randomX - 1.5f);
+                }
+                else
+                {
+                    holeX = Random.Range(randomX + 1.5f, maxSide);
+                }
+
+
+                Instantiate(monstre, new Vector3(holeX, lastSpawn, 0), monstre.transform.rotation);
+            }
+
+            
+
         }
 
 
@@ -203,6 +245,7 @@ public class GameHandler : MonoBehaviour
         endPosition = player.transform.position.y;
         gameEnd = true;
 
+        player.GetComponent<PlayerController>().gameEnd = true;
 
         //Set menu
 
