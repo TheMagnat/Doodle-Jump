@@ -35,8 +35,8 @@ public class GameHandler : MonoBehaviour
     private float brownProb = 0.35f;
     private float maxBlueProb = 0.35f;
     private float springProb = 0.25f;
-    private float blackProb = 0.05f;
-    private float monstreProb = 0.1f;
+    private float blackProb = 0.075f;
+    private float monstreProb = 0.13f;
 
     //Other
     float currentBrownProb;
@@ -71,7 +71,7 @@ public class GameHandler : MonoBehaviour
         greenPos.Add((0, lastSpawn));
         lastGreenY = lastSpawn;
 
-        generatePlatforms(1000);
+        generatePlatforms(10);
     }
 
     void generatePlatforms(float endPos)

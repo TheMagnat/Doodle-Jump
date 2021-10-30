@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpringController : MonoBehaviour
 {
+
+    private AudioSource source;
+
     Camera cam;
 
     Animator animator;
@@ -17,6 +20,8 @@ public class SpringController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        source = gameObject.GetComponent<AudioSource>();
+
         Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
 
         animator = gameObject.GetComponent<Animator>();
@@ -34,5 +39,6 @@ public class SpringController : MonoBehaviour
     public void Trigger()
     {
         animator.SetBool("trigger", true);
+        source.Play();
     }
 }

@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void Jump(float force)
+    public void Jump(float force, bool playSound=true)
     {
         animator.SetBool("jumping", true);
         elapsedPlie = 0.0f;
@@ -224,7 +224,12 @@ public class PlayerController : MonoBehaviour
         rigidBody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
         feetCollider.enabled = false;
 
-        source.Play();
+
+        if (playSound)
+        {
+            source.Play();
+        }
+        
 
     }
 
@@ -236,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
             if (rigidBody.velocity.y <= 0)
             {
-                Jump(40f);
+                Jump(40f, false);
 
                 collision.gameObject.GetComponent<SpringController>().Trigger();
 
