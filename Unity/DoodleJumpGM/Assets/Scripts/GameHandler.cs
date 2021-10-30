@@ -36,7 +36,7 @@ public class GameHandler : MonoBehaviour
     private float maxBlueProb = 0.35f;
     private float springProb = 0.25f;
     private float blackProb = 0.05f;
-    private float monstreProb = 0.075f;
+    private float monstreProb = 0.1f;
 
     //Other
     float currentBrownProb;
@@ -180,7 +180,7 @@ public class GameHandler : MonoBehaviour
 
                 Instantiate(blackHole, new Vector3(holeX, lastSpawn, 0), blackHole.transform.rotation);
             }
-            else if (spawnMonstre < System.Math.Max(0f, (2 * monstreProb * System.Math.Min(1f, lastSpawn / maxHeightDifficulty)) - monstreProb) && color.Equals("green"))
+            else if (spawnMonstre < System.Math.Max(0f, (1.5f * monstreProb * System.Math.Min(1f, lastSpawn / maxHeightDifficulty)) - monstreProb * 0.5f) && color.Equals("green"))
             {
                 float holeX = 0f;
 

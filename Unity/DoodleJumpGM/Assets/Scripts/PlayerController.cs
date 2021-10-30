@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    private AudioSource source;
+
+
     private Animator animator;
 
     private Camera cam;
@@ -35,15 +38,7 @@ public class PlayerController : MonoBehaviour
     private float elapsedFire = 0.0f;
     private float elapsedPlie = 0.0f;
 
-    //All sprites
-    public Sprite normalLeft;
-    public Sprite plieLeft;
-
-    public Sprite normalRight;
-    public Sprite plieRight;
-
-    public Sprite Fire;
-    public Sprite plieFire;
+    public GameObject projectile;
     
 
 
@@ -51,6 +46,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
+
+        source = gameObject.GetComponent<AudioSource>();
 
         animator = gameObject.GetComponent<Animator>();
 
@@ -88,7 +85,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("fire", true);
 
                 Vector3 screenPos = cam.WorldToScreenPoint(rigidBody.position);
-                Debug.Log("target is " + screenPos.x + " pixels from the left : " + cam.pixelWidth);
+                Instantiate(projectile, new Vector3(transform.position.x, transform.position.y+0.5f, transform.position.z), projectile.transform.rotation);
             }
 
 
@@ -226,6 +223,9 @@ public class PlayerController : MonoBehaviour
 
         rigidBody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
         feetCollider.enabled = false;
+
+        source.Play();
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

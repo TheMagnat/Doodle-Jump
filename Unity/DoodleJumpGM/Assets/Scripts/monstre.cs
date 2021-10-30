@@ -22,6 +22,10 @@ public class monstre : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
+
+        Debug.Log("MONSTRE ENTER");
+
+
         if (collision.CompareTag("Player"))
         {
 
@@ -38,6 +42,11 @@ public class monstre : MonoBehaviour
         }
 
 
+    }
+
+    public void Kill()
+    {
+        Object.Destroy(this.gameObject);
     }
 
 }
